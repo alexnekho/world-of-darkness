@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0c11">
+  <meta name="description" content="Русскоязычный портал по Миру Тьмы. Выберите свою историю: Демоны или Охотники.">
+  <title>Мир Тьмы — за гранью привычного</title>
+  <link rel="icon" href="assets/sigil.svg" type="image/svg+xml">
+  <link rel="preload" as="image" href="assets/archive.webp">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#world">Перейти к описанию мира</a>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Мир Тьмы — главная"><img src="assets/sigil.svg" alt="" width="42" height="42"><span>АРХИВ<span class="brand-sub">МИРА ТЬМЫ</span></span></a>
+    <nav aria-label="Основная навигация"><a href="#lineages">Линейки</a><a href="#world">О мире</a></nav>
+    <button class="motion-control" id="motion" aria-pressed="false" aria-label="Приостановить анимацию"><span aria-hidden="true">Ⅱ</span><span class="motion-label">Движение</span></button>
+  </header>
+
+  <main>
+    <section class="hero" id="lineages" aria-labelledby="hero-title">
+      <div class="archive" aria-hidden="true"></div><div class="cosmic-haze" aria-hidden="true"></div>
+      <div class="stars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="hero-heading"><p class="eyebrow">Добро пожаловать в</p><h1 id="hero-title">Мир Тьмы</h1><div class="ornament" aria-hidden="true"><span>✦</span></div><p class="hero-subtitle">У каждой тайны есть своя история. Выберите вашу.</p></div>
+
+      <div class="deck" id="deck" role="region" aria-roledescription="карусель" aria-label="Игровые линейки" tabindex="0">
+        <div class="deck-aura" aria-hidden="true"></div>
+        <button class="tarot" data-index="0" data-game="demon" aria-label="Демоны — выбрать карту"><span class="float"><span class="tilt"><span class="card-body"><span class="card-face"><img src="assets/demon.webp" width="448" height="800" alt="Гравюра падшего ангела. Демоны." fetchpriority="high"></span><span class="card-back"><img src="assets/back.webp" width="448" height="800" alt=""></span></span></span></span></button>
+        <button class="tarot" data-index="1" data-game="hunter" aria-label="Охотники — выбрать карту"><span class="float"><span class="tilt"><span class="card-body"><span class="card-face"><img src="assets/hunter.webp" width="448" height="800" alt="Охотник с фонарём в ночном городе."></span><span class="card-back"><img src="assets/back.webp" width="448" height="800" alt=""></span></span></span></span></button>
+        <button class="tarot" data-index="2" data-game="demon" aria-label="Демоны — повтор карты для демонстрации колоды"><span class="float"><span class="tilt"><span class="card-body"><span class="card-face"><img src="assets/demon.webp" width="448" height="800" alt="Повтор карты Демонов."></span><span class="card-back"><img src="assets/back.webp" width="448" height="800" alt=""></span></span></span></span></button>
+        <button class="tarot" data-index="3" data-game="hunter" aria-label="Охотники — повтор карты для демонстрации колоды"><span class="float"><span class="tilt"><span class="card-body"><span class="card-face"><img src="assets/hunter.webp" width="448" height="800" alt="Повтор карты Охотников."></span><span class="card-back"><img src="assets/back.webp" width="448" height="800" alt=""></span></span></span></span></button>
+        <button class="tarot" data-index="4" data-game="demon" aria-label="Демоны — повтор карты для демонстрации колоды"><span class="float"><span class="tilt"><span class="card-body"><span class="card-face"><img src="assets/demon.webp" width="448" height="800" alt="Повтор карты Демонов."></span><span class="card-back"><img src="assets/back.webp" width="448" height="800" alt=""></span></span></span></span></button>
+      </div>
+
+      <div class="deck-interface">
+        <div class="deck-navigation"><button class="arrow" id="previous" aria-label="Предыдущая карта">←</button><div class="positions" role="group" aria-label="Выбор карты"><button aria-label="Карта 1: Демоны" data-position="0"></button><button aria-label="Карта 2: Охотники" data-position="1"></button><button aria-label="Карта 3: Демоны, повтор" data-position="2"></button><button aria-label="Карта 4: Охотники, повтор" data-position="3"></button><button aria-label="Карта 5: Демоны, повтор" data-position="4"></button></div><button class="arrow" id="next" aria-label="Следующая карта">→</button></div>
+        <p class="gesture-hint"><span class="desktop-hint">Отведите мышь в сторону, чтобы сменить карту</span><span class="touch-hint">Листайте карты движением пальца</span></p>
+        <div class="selection" aria-live="polite" aria-atomic="true"><p class="selection-name" id="selection-name">Демоны: Падшие</p><p class="selection-description" id="selection-description">Утраченное небо. Человеческая душа. Второй шанс.</p></div>
+        <div class="selection-actions"><a class="enter-link" id="enter" href="#line/demon">Открыть историю <span aria-hidden="true">↗</span></a><button class="reverse-link" id="reverse" aria-pressed="false">Показать рубашку</button></div>
+      </div>
+    </section>
+
+    <section class="world-section" id="world" aria-labelledby="world-title">
+      <div class="section-ornament" aria-hidden="true"><span>✧</span></div>
+      <div class="world-intro"><p class="eyebrow">Знакомый мир. Иная сторона.</p><h2 id="world-title">За гранью привычного</h2><p class="lead">Город за окном почти не отличается от вашего. Но у его ночи есть другие хозяева.</p></div>
+      <div class="world-columns"><p>Мир Тьмы — мрачное отражение современной реальности. За привычными улицами, повседневными заботами и закрытыми дверями скрываются сверхъестественные существа, древние тайны и борьба за власть.</p><p>Его истории — о страхе и надежде, цене силы и выборе, который меняет человека. Здесь можно оказаться чудовищем, пытающимся сохранить человечность, или человеком, решившим противостоять чудовищам.</p></div>
+    </section>
+
+  </main>
+  <dialog id="line-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Закрыть">×</button><p class="eyebrow" id="dialog-original"></p><h2 id="dialog-title"></h2><p id="dialog-description"></p><div class="dialog-status"><span aria-hidden="true">✧</span><p>Справочник этой линейки готовится. Правила будут добавлены после разбора и сверки книг.</p></div><button class="dialog-return">Вернуться к колоде</button></dialog>
+  <!-- Display font: Brahms Gotisch Cyr by Sasha Pavljenko, SIL OFL 1.1. See FONT-LICENSE.txt. -->
+</body>
+</html>

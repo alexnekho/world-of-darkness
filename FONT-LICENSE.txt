@@ -1,0 +1,18 @@
+Greengoth Regular
+Author: Dimitri Antonov / Blue Curve Designstudio
+License: Creative Commons Attribution 4.0 International (CC BY 4.0).
+https://creativecommons.org/licenses/by/4.0/
+Font source: https://fonts-online.ru/fonts/greengoth
+License and author verified in the downloaded font's name table.
+Font file is unmodified. Used for headings in this fan project.
+
+Current display font: Brahms Gotisch Cyr by Sasha Pavljenko.
+SIL Open Font License 1.1, confirmed in font metadata.
+Source: https://fonts-online.ru/fonts/brahms-gotisch-cyrillic
+See OFL-Brahms-Gotisch-Cyr.txt. Original font unmodified.
+
+Revision 005 current fonts:
+Alice by Ksenia Erulevich, SIL OFL 1.1, see OFL-Alice.txt.
+Source: https://github.com/google/fonts/tree/main/ofl/alice
+GothicRus: local personal-use prototype only. Downloaded from https://fonts-online.ru/fonts/gothicrus . License not specified in font metadata; not cleared for future external distribution. Original preserved; portal-gothic-web.woff regenerated using fontTools, with legacy hinting removed for browser compatibility.
+Beyond Wonderland and Bonbon Bleu were inspected but not embedded: Cyrillic glyph outlines are empty.
