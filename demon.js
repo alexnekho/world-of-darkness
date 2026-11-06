@@ -229,7 +229,7 @@
   const form=el('form','note-editor'),title=el('input'),text=el('textarea');
   title.maxLength=160;title.required=true;title.value=saved?.title||item?.title||'';
   title.placeholder='Название заметки';title.setAttribute('aria-label','Название заметки');
-  text.maxLength=12000;text.rows=8;text.value=saved?.text??(custom?'':bookmarkExcerpt(item));
+   text.maxLength=12000;text.rows=8;text.value=window.DemonNoteBoard.customExcerpt(item,saved)??(custom?'':bookmarkExcerpt(item));
   text.placeholder='Что важно помнить за столом…';text.setAttribute('aria-label','Текст на листке');
   const palette=el('div','note-palette');palette.setAttribute('role','group');palette.setAttribute('aria-label','Цвет листка');let color=saved?.color||'paper';
   for(const [value,label] of [['paper','Пергамент'],['sage','Шалфей'],['rose','Роза'],['blue','Синий']]){
@@ -346,7 +346,8 @@
     const paper=el('div','note-paper'),meta=el('p','note-meta',item.personal?'Личная заметка':(labels[item.type]||'Правило')+(item.level?' · '+'●'.repeat(item.level):'')),heading=el('h3','note-title',saved?.title||item.title);
     const preview=el('div','note-preview');
     const excerpt=el('div','note-excerpt');
-    if(saved||item.personal)excerpt.textContent=saved?.text||'';
+    const customText=B.customExcerpt(item,saved);
+    if(customText!==null||item.personal)excerpt.textContent=customText||'';
     else{const rows=el('dl','note-mechanics');for(const row of B.summary(item,D)){rows.append(el('dt','',row.label),el('dd','',row.text))}excerpt.append(rows)}
     preview.append(excerpt);preview.tabIndex=0;preview.setAttribute('aria-label','Текст заметки: '+(saved?.title||item.title));
     if(!item.personal){
