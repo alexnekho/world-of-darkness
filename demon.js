@@ -257,7 +257,7 @@
    const add=el('button','note-add','+ Заметка');add.type='button';
    add.onclick=()=>noteDialog('Новая заметка',(dialog,close)=>noteEditor(dialog,null,id=>{close();draw(id)},close));
    const tidy=el('button','note-tidy','Разложить ровно');tidy.type='button';tidy.hidden=!free;tidy.onclick=()=>{prefs.resetPositions();draw()};
-   toolbar.append(modes,add,tidy,el('p','bookmark-hint',free?'Зажмите листок и тяните. Размер — за край или угол.':'Короткие памятки; полное правило — по кнопке.'));board.append(toolbar);
+    toolbar.append(modes,add,tidy,el('p','bookmark-hint',free?'Зажмите листок и тяните. Размер — за край или угол. Полное правило — ниже вырезки.':'Полное правило — ниже вырезки или в отдельном окне.'));board.append(toolbar);
    const stage=el('div','note-stage'),grid=el('div','bookmark-grid');grid.dataset.mode=mode;stage.append(grid);board.append(stage);
    stage.tabIndex=0;stage.setAttribute('aria-label',free?'Свободная доска. Прокручивайте для доступа к остальным листкам.':'Заметки');
    const canvasWidth=free?Math.max(1000,Math.floor(stage.clientWidth),...shown.map(item=>(prefs.position(item.id)?.x||0)+(prefs.size(item.id)?.width||260))):0;if(free)grid.style.width=canvasWidth+'px';
@@ -345,12 +345,20 @@
     remove.onclick=()=>{prefs.toggle(item.id);updateSavedCount();draw();const undo=el('button','note-undo','Вернуть снятую заметку');undo.type='button';undo.onclick=()=>{prefs.toggle(item.id);updateSavedCount();draw(item.id)};board.prepend(undo);announce('Заметка снята с доски.')};
     const paper=el('div','note-paper'),meta=el('p','note-meta',item.personal?'Личная заметка':(labels[item.type]||'Правило')+(item.level?' · '+'●'.repeat(item.level):'')),heading=el('h3','note-title',saved?.title||item.title);
     const preview=el('div','note-preview');
-    if(saved||item.personal)preview.textContent=saved?.text||'';
-    else{const rows=el('dl','note-mechanics');for(const row of B.summary(item,D)){rows.append(el('dt','',row.label),el('dd','',row.text))}preview.append(rows)}
+    const excerpt=el('div','note-excerpt');
+    if(saved||item.personal)excerpt.textContent=saved?.text||'';
+    else{const rows=el('dl','note-mechanics');for(const row of B.summary(item,D)){rows.append(el('dt','',row.label),el('dd','',row.text))}excerpt.append(rows)}
+    preview.append(excerpt);preview.tabIndex=0;preview.setAttribute('aria-label','Текст заметки: '+(saved?.title||item.title));
+    if(!item.personal){
+     const full=el('section','note-full-rule'),source=entry(item,true).querySelector('.entry-body');
+     source.querySelectorAll('.reading-actions,.article-outline').forEach(n=>n.remove());
+     full.append(el('h4','note-full-heading','Полное правило'),source);preview.append(full);
+    }
+    preview.addEventListener('scroll',()=>prefs.setScroll(item.id,preview.scrollTop));
     paper.append(meta,heading,preview);tile.append(controls,paper);
     const open=el('button','note-open',item.personal?'Весь текст':'Полное правило');open.type='button';
     open.onclick=()=>noteDialog(saved?.title||item.title,(dialog)=>{if(item.personal)dialog.append(el('div','note-personal-full',saved?.text||''));else dialog.append(entry(item,true),a('Открыть статью отдельно','#entry/'+item.id,'note-source-link'))});tile.append(open);
-    grid.append(tile);if(free)place(item.id,positions.get(item.id));
+    grid.append(tile);if(free)place(item.id,positions.get(item.id));preview.scrollTop=prefs.scroll(item.id);
    });
    sizeCanvas();
    if(!shown.length)board.append(el('p','empty','Добавьте свою заметку или сохраните правило в закладки.'));
@@ -361,7 +369,7 @@
  }
 
  function bookmarksPage() {
-  head('Доска заметок', 'Короткие памятки к игре. Расставляйте листки свободно; полный текст открывается отдельно.', prefs.bookmarks().length + ' записей');
+   head('Доска заметок', 'Сверху — краткая вырезка, ниже — полное правило. Размер листка и место прокрутки сохраняются.', prefs.bookmarks().length + ' записей');
   if (!prefs.canPersist()) notice('Сохранение в браузере недоступно: закладки останутся только в текущей вкладке.');
   bookmarkBoard(view);
  }

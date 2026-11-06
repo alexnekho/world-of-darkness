@@ -724,3 +724,15 @@ footer {
 
 .builder-skill-faq{grid-column:1/-1;padding:13px 16px;border:1px solid #a68a5655;background:#2f261d44}.builder-skill-faq>summary{font-size:14px;color:#cdb68e;cursor:pointer}.builder-skill-faq p{font-size:14px;line-height:1.7;color:#bfb095;margin:12px 0 0}.character-base-note{display:block;font:9px/1.5 var(--reading-font);text-align:right;color:#91826a;letter-spacing:normal}
 @media print{body.print-character .character-base-note{font-size:7pt}}
+
+/* One scroll container: excerpt first, the unabridged source immediately below. */
+.note-preview{white-space:normal;overscroll-behavior:contain;scrollbar-gutter:stable;overflow-anchor:none}
+.note-excerpt{white-space:pre-wrap}.note-excerpt:empty:before{content:'Пустая вырезка. Нажмите «Изменить», чтобы добавить свою памятку.';font-style:italic;color:#75634e}
+.note-full-rule{margin-top:18px;border-top:1px dashed #80633a66;padding-top:12px;--folio-ink:var(--ink);--folio-rule:#80633a44;--text:var(--ink);--muted:#69563d;--line:#80633a44;--gold:#725231}
+.note-full-rule>.note-full-heading{font:600 11px/1.4 var(--reading-font);text-transform:uppercase;letter-spacing:.06em;margin:0 0 12px;color:#69563d}
+.bookmark-tile .note-full-rule>.entry-body{padding:0;border:0;background:none;max-height:none;overflow:visible;box-shadow:none;white-space:normal}
+.note-full-rule .entry-body p,.note-full-rule .entry-body li,.note-full-rule .entry-body strong,.note-full-rule .entry-body h4,.note-full-rule .entry-body a,.note-full-rule .entry-body td{color:var(--ink);font-size:14px;line-height:1.5;max-width:none}
+.note-full-rule .entry-body p{margin:10px 0}.note-full-rule .entry-body h4{font-size:13px;margin:16px 0 8px}.note-full-rule .entry-body section:first-child>h4{margin-top:0}
+.note-full-rule .entry-body .table-wrap{background:transparent;max-width:100%;overflow-x:auto}.note-full-rule .entry-body th,.note-full-rule .entry-body td{padding:6px;font-size:12px}.note-full-rule .entry-body th{background:#80633a22;color:var(--ink)}
+.note-full-rule .entry-body .citation,.note-full-rule .entry-body .citation p,.note-full-rule .entry-body .citation a{font-size:11px;color:#69563d}.note-full-rule .entry-body .torment{background:#8f3e4020;border-color:#8f3e4044}
+.note-full-rule .entry-body .notice,.note-full-rule .entry-body .reading-note,.note-full-rule .entry-body .access-note{background:#80633a16;border-color:#80633a44;color:var(--ink);font-size:12px;padding:9px}
