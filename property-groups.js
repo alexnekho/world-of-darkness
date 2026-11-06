@@ -26,8 +26,17 @@
  }
  function collapseMatched(properties,index){const seen=new Set(),items=[];for(const p of properties){const g=index.byId.get(p.id);if(g&&!seen.has(g.id)){seen.add(g.id);items.push(g)}}return items}
  function tormentMatches(p,level){return !level||p.torment==='either'||(p.high?'high':'low')===level}
- function priceLabel(p){return p.catalogKind==='priced'?(p.cost===null?'Цена не указана':p.cost+' БФ'+(p.high?' *':'')):'—'}
- const api={extract,group,collapseMatched,tormentMatches,priceLabel};
+ function priceLabel(p){return p.catalogKind==='priced'&&Number.isFinite(p.cost)?p.cost+' БФ'+(p.high?' *':''):'Цена не указана'}
+ function sortByCost(items,order){
+  const direction=order==='cost-desc'?-1:1;
+  return [...items].sort((a,b)=>{
+   const aKnown=a.catalogKind==='priced'&&Number.isFinite(a.cost);
+   const bKnown=b.catalogKind==='priced'&&Number.isFinite(b.cost);
+   if(aKnown!==bKnown)return aKnown?-1:1;
+   return (aKnown?direction*(a.cost-b.cost):0)||a.title.localeCompare(b.title,'ru');
+  });
+ }
+ const api={extract,group,collapseMatched,tormentMatches,priceLabel,sortByCost};
  if(typeof module==='object'&&module.exports)module.exports=api;
  else root.DemonPropertyGroups=api;
 })(typeof window==='object'?window:globalThis);
